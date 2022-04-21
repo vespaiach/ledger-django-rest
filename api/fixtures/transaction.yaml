@@ -1,0 +1,74 @@
+- model: api.reason
+  pk: 1
+  fields:
+      created_at: 2022-04-20 12:18:00+00:00
+      updated_at: 2022-04-20 12:18:00+00:00
+      text: food
+- model: api.reason
+  pk: 2
+  fields:
+      created_at: 2022-04-20 12:19:00+00:00
+      updated_at: 2022-04-20 12:19:00+00:00
+      text: fuel
+- model: api.reason
+  pk: 3
+  fields:
+      created_at: 2022-04-20 12:18:00+00:00
+      updated_at: 2022-04-20 12:18:00+00:00
+      text: gas
+- model: api.reason
+  pk: 4
+  fields:
+      created_at: 2022-04-20 12:18:00+00:00
+      updated_at: 2022-04-20 12:18:00+00:00
+      text: electric
+- model: api.reason
+  pk: 5
+  fields:
+      created_at: 2022-04-20 12:18:00+00:00
+      updated_at: 2022-04-20 12:18:00+00:00
+      text: trash
+- model: api.reason
+  pk: 6
+  fields:
+      created_at: 2022-04-20 12:18:00+00:00
+      updated_at: 2022-04-20 12:18:00+00:00
+      text: paycheck
+- model: api.reason
+  pk: 7
+  fields:
+      created_at: 2022-04-20 12:18:00+00:00
+      updated_at: 2022-04-20 12:18:00+00:00
+      text: restaurant
+- model: api.transaction
+  pk: 1
+  fields:
+      created_at: 2022-04-20 13:25:00+00:00
+      updated_at: 2022-04-20 13:25:00+00:00
+      amount: 800000
+      date: 2022-04-05 13:25:00+00:00
+      note: salary
+      reasons:
+          - 6
+- model: api.transaction
+  pk: 2
+  fields:
+      created_at: 2022-04-20 13:26:00+00:00
+      updated_at: 2022-04-20 13:02:00+00:00
+      amount: -12000
+      date: 2022-04-06 18:00:00+00:00
+      note: dine out
+      reasons:
+          - 7
+- model: api.transaction
+  pk: 3
+  fields:
+      created_at: 2022-04-07 05:00:00+00:00
+      updated_at: 2022-04-07 05:00:00+00:00
+      amount: -80000
+      date: 2022-04-05 12:00:00+00:00
+      note: pay utilities
+      reasons:
+          - 4
+          - 3
+          - 5
