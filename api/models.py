@@ -1,4 +1,5 @@
-from datetime import datetime
+from django.contrib.auth.models import User
+from django.contrib.auth.models import User as OriginUser
 from django.db import models
 from django.forms import ValidationError
 from django.utils import timezone
@@ -51,3 +52,8 @@ class Transaction(BaseModel):
 
     def __str__(self):
         return f"id:{self.id}|amount:{self.amount}|date:{self.date}"
+
+
+class Token(BaseModel):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    iat = models.IntegerField(blank=False)

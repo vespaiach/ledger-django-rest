@@ -1,7 +1,11 @@
 from typing import List
-
+from django.conf import settings
+from jwt import encode
+from datetime import datetime
+from django.contrib.auth import authenticate
 from django.forms import ValidationError
-from api.models import Reason, Transaction
+from django.core.exceptions import ObjectDoesNotExist
+from api.models import Reason, Token, Transaction
 from api.selectors import get_reason_by_text
 
 
@@ -66,3 +70,25 @@ def delete_transaction(id: int) -> None:
 
     tx.reasons.clear()
     tx.delete()
+
+
+def exchange_for_token(request, username, password) -> str:
+    user = authenticate(request, username=username, password=password)
+
+    if not user:
+        return None
+
+    iat = int(datetime.utcnow().timestamp())
+
+    try:
+        token_info = user.token
+        token_info.iat = iat
+    except ObjectDoesNotExist:
+        token_info = Token(user=user, iat=iat)
+    finally:
+        token_info.save()
+
+        token = encode({"user_id": user.id, "token_id": token_info.id, "iat": iat},
+                       settings.SECRET_KEY, settings.JWT_ALGORITHM)
+
+        return token
