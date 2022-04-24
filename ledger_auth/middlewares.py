@@ -1,6 +1,6 @@
 import json
-from django.forms import ValidationError
 from django.http import QueryDict
+from core.exception import throw_validation_error
 
 from ledger_auth.services import decode_token, is_revoked
 
@@ -22,7 +22,7 @@ class JSONContentTypeMiddleware(object):
                 q_data = QueryDict('', mutable=True)
                 q_data.update(json.loads(request.body))
             except:
-                raise ValidationError('Wrong json format')
+                throw_validation_error(message='Payload had wrong json format')
             else:
                 setattr(request, method, q_data)
 

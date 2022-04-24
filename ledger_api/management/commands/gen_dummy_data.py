@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 
 from faker import Faker
-from api.models import Reason, Transaction
+from ledger_api.models import Reason, Transaction
 
 fake = Faker()
 

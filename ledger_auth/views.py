@@ -1,11 +1,11 @@
 from django import forms
-from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate
+from core.exception import throw_validation_error
 
-from ledger_auth.services import generate_token
+from ledger_auth.services import generate_token, revoke_token
 
 
 @csrf_exempt
@@ -17,13 +17,15 @@ def token(request):
 
     token_form = TokenForm(request.POST)
     if not token_form.is_valid():
-        raise ValidationError('Username and password are required.')
+        raise throw_validation_error(
+            message='Username and password are required', extra=token_form.errors)
 
     user = authenticate(
         request, username=token_form.cleaned_data['username'], password=token_form.cleaned_data['password'])
 
     if user is None:
-        raise ValidationError('username or password was not correct')
+        raise throw_validation_error(
+            message='username or password was not correct')
 
     return JsonResponse({"token": generate_token(user.id)})
 
@@ -32,6 +34,7 @@ def token(request):
 @require_http_methods(['POST'])
 def revoke(request):
     if request.TOKEN is not None:
-        return JsonResponse({"data": False})
+        revoke_token(request.TOKEN['token'], request.TOKEN['payload']['exp'])
+        return JsonResponse({"data": True})
 
-    return JsonResponse({"data": True})
+    return JsonResponse({"data": False})

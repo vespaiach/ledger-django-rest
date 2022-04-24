@@ -32,8 +32,9 @@ def generate_token(user_id):
     return token
 
 
-def revoke_token(token):
-    RevokedToken.objects.create(token=token)
+def revoke_token(token, exp):
+    RevokedToken.objects.create(
+        token=token, exp=datetime.fromtimestamp(exp / 1e3))
 
 
 def decode_token(token):

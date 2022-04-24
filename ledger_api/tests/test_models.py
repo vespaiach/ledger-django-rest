@@ -1,10 +1,10 @@
 from datetime import datetime
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.test import TestCase
-from api.models import Reason, Transaction
-from api.selectors import get_reason_by_text, get_transactions
+from ledger_api.models import Reason, Transaction
+from ledger_api.selectors import get_reason_by_text, get_transactions
 
-from api.services import create_reason, create_transaction, delete_transaction, update_transaction
+from ledger_api.services import create_reason, create_transaction, delete_transaction, update_transaction
 
 
 class ReasonTest(TestCase):

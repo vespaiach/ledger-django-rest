@@ -1,6 +1,6 @@
 from typing import List
 from django.core.paginator import Paginator
-from api.models import Reason, Transaction
+from ledger_api.models import Reason, Transaction
 from django.core.exceptions import ObjectDoesNotExist
 
 

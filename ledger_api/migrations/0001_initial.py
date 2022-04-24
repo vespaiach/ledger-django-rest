@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
                 ('amount', models.IntegerField()),
                 ('date', models.DateTimeField()),
                 ('note', models.CharField(blank=True, max_length=511)),
-                ('reasons', models.ManyToManyField(to='api.reason')),
+                ('reasons', models.ManyToManyField(to='ledger_api.reason')),
             ],
             options={
                 'ordering': ['-date'],

@@ -2,6 +2,8 @@ from django.urls import reverse
 from django.test import Client, TestCase
 import json
 
+from ledger_auth.services import is_revoked
+
 
 class TokenTest(TestCase):
     fixtures = ['user.yaml']
@@ -13,12 +15,16 @@ class TokenTest(TestCase):
 
         self.assertEqual(response.status_code, 200)
 
-    # def test_request_token_fail(self):
-    #     c = Client()
-    #     response = c.post(
-    #         reverse('exchange_for_token'), {'username': 'tony1', 'password': '123'}, content_type='application/json')
+    def test_request_token_fail(self):
+        c = Client()
+        response = c.post(
+            reverse('get_token'), {'username': 'tony1', 'password': '123'}, content_type='application/json')
 
-    #     self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.status_code, 400)
+
+        error_response = json.loads(response.content.decode('utf-8'))
+        self.assertEqual(error_response['message'],
+                         "username or password was not correct")
 
     def test_revoke_token(self):
         c = Client()
@@ -31,6 +37,3 @@ class TokenTest(TestCase):
             reverse('revoke_token'), content_type='application/json', authorization=token)
 
         self.assertEqual(revoke_response.status_code, 200)
-
-
-# Create your tests here.

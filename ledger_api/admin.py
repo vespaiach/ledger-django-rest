@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from api.models import Reason, Transaction
+from ledger_api.models import Reason, Transaction
 
 # Register your models here.
 

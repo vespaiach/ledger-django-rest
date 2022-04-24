@@ -35,7 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'api',
+    'ledger_api',
     'ledger_auth',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -56,6 +56,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'querycount.middleware.QueryCountMiddleware',
     'ledger_auth.middlewares.TokenMiddleware',
+    'ledger_api.middlewares.ExceptionHandlerMiddleware'
 ]
 
 ROOT_URLCONF = 'ledger_django.urls'

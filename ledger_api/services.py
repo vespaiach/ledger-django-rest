@@ -1,11 +1,7 @@
 from typing import List
-from django.conf import settings
-from jwt import encode
-from datetime import datetime, timedelta
-from django.contrib.auth import authenticate
 from django.forms import ValidationError
-from api.models import Reason, Transaction
-from api.selectors import get_reason_by_text
+from ledger_api.models import Reason, Transaction
+from ledger_api.selectors import get_reason_by_text
 
 
 def create_reason(text: str) -> Reason:
