@@ -54,6 +54,6 @@ class Transaction(BaseModel):
         return f"id:{self.id}|amount:{self.amount}|date:{self.date}"
 
 
-class Token(BaseModel):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    iat = models.IntegerField(blank=False)
+class RevokedToken(BaseModel):
+    token = models.CharField(max_length=2024, primary_key=True, blank=False)
+    exp = models.DateTimeField(blank=False)

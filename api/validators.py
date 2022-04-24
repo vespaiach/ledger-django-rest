@@ -6,7 +6,6 @@ def check_token_input(request):
     class TokenForm(forms.Form):
         username = forms.CharField(max_length=64, required=True)
         password = forms.CharField(max_length=64, required=True)
-        num = forms.IntegerField(required=True)
 
     token_form = TokenForm(request.POST)
     if not token_form.is_valid():
