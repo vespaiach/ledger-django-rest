@@ -9,7 +9,7 @@ class TokenTest(TestCase):
     def test_request_token_success(self):
         c = Client()
         response = c.post(
-            reverse('exchange_for_token'), {'username': 'tony', 'password': '123'}, content_type='application/json')
+            reverse('get_token'), {'username': 'tony', 'password': '123'}, content_type='application/json')
 
         self.assertEqual(response.status_code, 200)
 
@@ -23,11 +23,14 @@ class TokenTest(TestCase):
     def test_revoke_token(self):
         c = Client()
         token_response = c.post(
-            reverse('exchange_for_token'), {'username': 'tony', 'password': '123'}, content_type='application/json')
+            reverse('get_token'), {'username': 'tony', 'password': '123'}, content_type='application/json')
 
         token = json.loads(token_response.content.decode('utf-8'))['token']
 
-        revoke_response = c.get(
+        revoke_response = c.post(
             reverse('revoke_token'), content_type='application/json', authorization=token)
 
         self.assertEqual(revoke_response.status_code, 200)
+
+
+# Create your tests here.

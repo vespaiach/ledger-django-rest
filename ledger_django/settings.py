@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-^j9mqh)_6vsze3tl8!@%^8**%d0it7jzb+=%+na!r@*9-p1%le'
+SECRET_KEY = 'django-insecure-^j9mqh)sze3tl8!@%^8**%d0it7jzb+=%+na!r@*9-p1%le'
 
 JWT_ALGORITHM = 'HS256'
 JWT_ISSUER = 'ledger::'
@@ -36,6 +36,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'api',
+    'ledger_auth',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,14 +48,14 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'api.middlewares.TokenMiddleware',
+    'ledger_auth.middlewares.JSONContentTypeMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'querycount.middleware.QueryCountMiddleware',
-    'api.middlewares.JSONMiddleware',
+    'ledger_auth.middlewares.TokenMiddleware',
 ]
 
 ROOT_URLCONF = 'ledger_django.urls'

@@ -52,8 +52,3 @@ class Transaction(BaseModel):
 
     def __str__(self):
         return f"id:{self.id}|amount:{self.amount}|date:{self.date}"
-
-
-class RevokedToken(BaseModel):
-    token = models.CharField(max_length=2024, primary_key=True, blank=False)
-    exp = models.DateTimeField(blank=False)

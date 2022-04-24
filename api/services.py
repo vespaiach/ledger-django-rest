@@ -69,19 +69,3 @@ def delete_transaction(id: int) -> None:
 
     tx.reasons.clear()
     tx.delete()
-
-
-def exchange_for_token(request, username, password) -> str:
-    user = authenticate(request, username=username, password=password)
-
-    if not user:
-        return None
-
-    iat = int(datetime.utcnow().timestamp())
-    exp = int(
-        (datetime.utcnow() + timedelta(minutes=settings.JWT_DURATION)).timestamp())
-
-    token = encode({"user_id": user.id, "exp": exp, "iat": iat, "iss": settings.JWT_ISSUER},
-                   settings.SECRET_KEY, settings.JWT_ALGORITHM)
-
-    return token
