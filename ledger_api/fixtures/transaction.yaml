@@ -1,74 +1,63 @@
 - model: ledger_api.reason
   pk: 1
   fields:
-      created_at: 2022-04-20 12:18:00+00:00
-      updated_at: 2022-04-20 12:18:00+00:00
-      text: food
+      created_at: 2022-04-25 04:00:36.202818+00:00
+      updated_at: 2022-04-25 04:00:36.206537+00:00
+      text: salary
 - model: ledger_api.reason
   pk: 2
   fields:
-      created_at: 2022-04-20 12:19:00+00:00
-      updated_at: 2022-04-20 12:19:00+00:00
-      text: fuel
+      created_at: 2022-04-25 04:00:44.898484+00:00
+      updated_at: 2022-04-25 04:00:44.899293+00:00
+      text: food
 - model: ledger_api.reason
   pk: 3
   fields:
-      created_at: 2022-04-20 12:18:00+00:00
-      updated_at: 2022-04-20 12:18:00+00:00
-      text: gas
+      created_at: 2022-04-25 04:01:00.229789+00:00
+      updated_at: 2022-04-25 04:01:00.230681+00:00
+      text: medicine
 - model: ledger_api.reason
   pk: 4
   fields:
-      created_at: 2022-04-20 12:18:00+00:00
-      updated_at: 2022-04-20 12:18:00+00:00
-      text: electric
+      created_at: 2022-04-25 04:01:11.472033+00:00
+      updated_at: 2022-04-25 04:01:11.472928+00:00
+      text: insurance
 - model: ledger_api.reason
   pk: 5
   fields:
-      created_at: 2022-04-20 12:18:00+00:00
-      updated_at: 2022-04-20 12:18:00+00:00
-      text: trash
+      created_at: 2022-04-25 04:01:25.747585+00:00
+      updated_at: 2022-04-25 04:01:25.748468+00:00
+      text: fuel
 - model: ledger_api.reason
   pk: 6
   fields:
-      created_at: 2022-04-20 12:18:00+00:00
-      updated_at: 2022-04-20 12:18:00+00:00
-      text: paycheck
-- model: ledger_api.reason
-  pk: 7
-  fields:
-      created_at: 2022-04-20 12:18:00+00:00
-      updated_at: 2022-04-20 12:18:00+00:00
-      text: restaurant
+      created_at: 2022-04-25 04:03:41.894253+00:00
+      updated_at: 2022-04-25 04:03:41.894837+00:00
+      text: tips
 - model: ledger_api.transaction
   pk: 1
   fields:
-      created_at: 2022-04-20 13:25:00+00:00
-      updated_at: 2022-04-20 13:25:00+00:00
+      created_at: 2022-04-25 04:03:41.888505+00:00
+      updated_at: 2022-04-25 04:03:41.889759+00:00
       amount: 800000
-      date: 2022-04-05 13:25:00+00:00
-      note: salary
+      date: 2022-04-24 11:02:00+00:00
+      note: Compensate
+      user: 1
       reasons:
+          - 1
           - 6
-- model: ledger_api.transaction
-  pk: 2
+- model: auth.user
+  pk: 1
   fields:
-      created_at: 2022-04-20 13:26:00+00:00
-      updated_at: 2022-04-20 13:02:00+00:00
-      amount: -12000
-      date: 2022-04-06 18:00:00+00:00
-      note: dine out
-      reasons:
-          - 7
-- model: ledger_api.transaction
-  pk: 3
-  fields:
-      created_at: 2022-04-07 05:00:00+00:00
-      updated_at: 2022-04-07 05:00:00+00:00
-      amount: -80000
-      date: 2022-04-05 12:00:00+00:00
-      note: pay utilities
-      reasons:
-          - 4
-          - 3
-          - 5
+      password: pbkdf2_sha256$320000$XCsyrcolVd3Lk43kxUwnsJ$nUPR1jZYtvuoEONWtdMDPBNFDCOHfa+444F5ONCtlek=
+      last_login: null
+      is_superuser: true
+      username: tony
+      first_name: ''
+      last_name: ''
+      email: toan@gmail.com
+      is_staff: true
+      is_active: true
+      date_joined: 2022-04-23 22:15:02.809851+00:00
+      groups: []
+      user_permissions: []

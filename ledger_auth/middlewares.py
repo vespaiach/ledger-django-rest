@@ -1,7 +1,7 @@
 import json
 from django.http import QueryDict
-from core.exception import throw_validation_error
 
+from ledger_core.exception import throw_validation_error
 from ledger_auth.services import decode_token, is_revoked
 
 

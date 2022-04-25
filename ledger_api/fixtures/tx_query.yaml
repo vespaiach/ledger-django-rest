@@ -1,106 +1,382 @@
-- model: ledger_api.reason
-  pk: 1
-  fields:
-      created_at: 2022-04-20 12:18:00+00:00
-      updated_at: 2022-04-20 12:18:00+00:00
-      text: food
-- model: ledger_api.reason
-  pk: 2
-  fields:
-      created_at: 2022-04-20 12:19:00+00:00
-      updated_at: 2022-04-20 12:19:00+00:00
-      text: fuel
-- model: ledger_api.reason
-  pk: 3
-  fields:
-      created_at: 2022-04-20 12:18:00+00:00
-      updated_at: 2022-04-20 12:18:00+00:00
-      text: gas
-- model: ledger_api.reason
-  pk: 4
-  fields:
-      created_at: 2022-04-20 12:18:00+00:00
-      updated_at: 2022-04-20 12:18:00+00:00
-      text: electric
-- model: ledger_api.reason
-  pk: 5
-  fields:
-      created_at: 2022-04-20 12:18:00+00:00
-      updated_at: 2022-04-20 12:18:00+00:00
-      text: trash
-- model: ledger_api.reason
-  pk: 6
-  fields:
-      created_at: 2022-04-20 12:18:00+00:00
-      updated_at: 2022-04-20 12:18:00+00:00
-      text: paycheck
-- model: ledger_api.reason
-  pk: 7
-  fields:
-      created_at: 2022-04-20 12:18:00+00:00
-      updated_at: 2022-04-20 12:18:00+00:00
-      text: restaurant
-- model: ledger_api.reason
-  pk: 8
-  fields:
-      created_at: 2022-04-20 12:18:00+00:00
-      updated_at: 2022-04-20 12:18:00+00:00
-      text: bonus
-- model: ledger_api.reason
-  pk: 9
-  fields:
-      created_at: 2022-04-20 12:18:00+00:00
-      updated_at: 2022-04-20 12:18:00+00:00
-      text: other
-- model: ledger_api.transaction
-  pk: 1
-  fields:
-      created_at: 2022-04-20 13:25:00+00:00
-      updated_at: 2022-04-20 13:25:00+00:00
-      amount: 800000
-      date: 2022-04-05 13:25:00+00:00
-      note: salary
-      reasons:
-          - 6
-- model: ledger_api.transaction
-  pk: 2
-  fields:
-      created_at: 2022-04-20 13:26:00+00:00
-      updated_at: 2022-04-20 13:02:00+00:00
-      amount: -12000
-      date: 2022-04-06 18:00:00+00:00
-      note: dine out
-      reasons:
-          - 7
-- model: ledger_api.transaction
-  pk: 3
-  fields:
-      created_at: 2022-04-07 05:00:00+00:00
-      updated_at: 2022-04-07 05:00:00+00:00
-      amount: -80000
-      date: 2022-04-05 12:00:00+00:00
-      note: pay utilities
-      reasons:
-          - 4
-          - 3
-          - 5
-- model: ledger_api.transaction
-  pk: 4
-  fields:
-      created_at: 2022-04-21 17:00:00+00:00
-      updated_at: 2022-04-21 17:00:00+00:00
-      amount: -200000
-      date: 2022-04-21 17:00:00+00:00
-      note: repair car
-      reasons:
-          - 9
-- model: ledger_api.transaction
-  pk: 5
-  fields:
-      created_at: 2022-04-22 17:00:00+00:00
-      updated_at: 2022-04-22 17:00:00+00:00
-      amount: -40000
-      date: 2022-04-22 17:00:00+00:00
-      note: food stock
-      reasons:
-          - 1
+-   model: ledger_api.reason
+    pk: 1
+    fields:
+        created_at: 2022-04-25 04:00:36.202818+00:00
+        updated_at: 2022-04-25 04:00:36.206537+00:00
+        text: salary
+-   model: ledger_api.reason
+    pk: 2
+    fields:
+        created_at: 2022-04-25 04:00:44.898484+00:00
+        updated_at: 2022-04-25 04:00:44.899293+00:00
+        text: food
+-   model: ledger_api.reason
+    pk: 3
+    fields:
+        created_at: 2022-04-25 04:01:00.229789+00:00
+        updated_at: 2022-04-25 04:01:00.230681+00:00
+        text: medicine
+-   model: ledger_api.reason
+    pk: 4
+    fields:
+        created_at: 2022-04-25 04:01:11.472033+00:00
+        updated_at: 2022-04-25 04:01:11.472928+00:00
+        text: insurance
+-   model: ledger_api.reason
+    pk: 5
+    fields:
+        created_at: 2022-04-25 04:01:25.747585+00:00
+        updated_at: 2022-04-25 04:01:25.748468+00:00
+        text: fuel
+-   model: ledger_api.reason
+    pk: 6
+    fields:
+        created_at: 2022-04-25 04:03:41.894253+00:00
+        updated_at: 2022-04-25 04:03:41.894837+00:00
+        text: tips
+-   model: ledger_api.reason
+    pk: 7
+    fields:
+        created_at: 2022-04-25 17:43:23.282726+00:00
+        updated_at: 2022-04-25 17:43:23.283474+00:00
+        text: essentials
+-   model: ledger_api.reason
+    pk: 8
+    fields:
+        created_at: 2022-04-25 17:44:50.644042+00:00
+        updated_at: 2022-04-25 17:44:50.644708+00:00
+        text: bonus
+-   model: ledger_api.transaction
+    pk: 1
+    fields:
+        created_at: 2022-04-25 04:03:41.888505+00:00
+        updated_at: 2022-04-25 04:03:41.889759+00:00
+        amount: 800000
+        date: 2022-04-24 11:02:00+00:00
+        note: Compensate
+        user: 1
+        reasons:
+        - 1
+        - 6
+-   model: ledger_api.transaction
+    pk: 2
+    fields:
+        created_at: 2022-04-25 17:43:23.273916+00:00
+        updated_at: 2022-04-25 17:43:23.277904+00:00
+        amount: -150000
+        date: 2022-04-23 12:30:00+00:00
+        note: from store
+        user: 1
+        reasons:
+        - 7
+        - 2
+-   model: ledger_api.transaction
+    pk: 3
+    fields:
+        created_at: 2022-04-25 17:43:29.675190+00:00
+        updated_at: 2022-04-25 17:43:29.676571+00:00
+        amount: -20000
+        date: 2022-04-21 12:30:00+00:00
+        note: fill car tank
+        user: 1
+        reasons:
+        - 5
+-   model: ledger_api.transaction
+    pk: 4
+    fields:
+        created_at: 2022-04-25 17:43:34.320438+00:00
+        updated_at: 2022-04-25 17:43:34.321433+00:00
+        amount: -10000
+        date: 2022-04-20 12:30:00+00:00
+        note: buy medicine
+        user: 1
+        reasons:
+        - 3
+-   model: ledger_api.transaction
+    pk: 5
+    fields:
+        created_at: 2022-04-25 17:44:50.640948+00:00
+        updated_at: 2022-04-25 17:44:50.641949+00:00
+        amount: 10000
+        date: 2022-04-24 12:30:00+00:00
+        note: pick up money on street
+        user: 1
+        reasons:
+        - 8
+        - 6
+-   model: auth.permission
+    pk: 1
+    fields:
+        name: Can add reason
+        content_type: 1
+        codename: add_reason
+-   model: auth.permission
+    pk: 2
+    fields:
+        name: Can change reason
+        content_type: 1
+        codename: change_reason
+-   model: auth.permission
+    pk: 3
+    fields:
+        name: Can delete reason
+        content_type: 1
+        codename: delete_reason
+-   model: auth.permission
+    pk: 4
+    fields:
+        name: Can view reason
+        content_type: 1
+        codename: view_reason
+-   model: auth.permission
+    pk: 5
+    fields:
+        name: Can add transaction
+        content_type: 2
+        codename: add_transaction
+-   model: auth.permission
+    pk: 6
+    fields:
+        name: Can change transaction
+        content_type: 2
+        codename: change_transaction
+-   model: auth.permission
+    pk: 7
+    fields:
+        name: Can delete transaction
+        content_type: 2
+        codename: delete_transaction
+-   model: auth.permission
+    pk: 8
+    fields:
+        name: Can view transaction
+        content_type: 2
+        codename: view_transaction
+-   model: auth.permission
+    pk: 9
+    fields:
+        name: Can add revoked token
+        content_type: 3
+        codename: add_revokedtoken
+-   model: auth.permission
+    pk: 10
+    fields:
+        name: Can change revoked token
+        content_type: 3
+        codename: change_revokedtoken
+-   model: auth.permission
+    pk: 11
+    fields:
+        name: Can delete revoked token
+        content_type: 3
+        codename: delete_revokedtoken
+-   model: auth.permission
+    pk: 12
+    fields:
+        name: Can view revoked token
+        content_type: 3
+        codename: view_revokedtoken
+-   model: auth.permission
+    pk: 13
+    fields:
+        name: Can add log entry
+        content_type: 4
+        codename: add_logentry
+-   model: auth.permission
+    pk: 14
+    fields:
+        name: Can change log entry
+        content_type: 4
+        codename: change_logentry
+-   model: auth.permission
+    pk: 15
+    fields:
+        name: Can delete log entry
+        content_type: 4
+        codename: delete_logentry
+-   model: auth.permission
+    pk: 16
+    fields:
+        name: Can view log entry
+        content_type: 4
+        codename: view_logentry
+-   model: auth.permission
+    pk: 17
+    fields:
+        name: Can add permission
+        content_type: 5
+        codename: add_permission
+-   model: auth.permission
+    pk: 18
+    fields:
+        name: Can change permission
+        content_type: 5
+        codename: change_permission
+-   model: auth.permission
+    pk: 19
+    fields:
+        name: Can delete permission
+        content_type: 5
+        codename: delete_permission
+-   model: auth.permission
+    pk: 20
+    fields:
+        name: Can view permission
+        content_type: 5
+        codename: view_permission
+-   model: auth.permission
+    pk: 21
+    fields:
+        name: Can add group
+        content_type: 6
+        codename: add_group
+-   model: auth.permission
+    pk: 22
+    fields:
+        name: Can change group
+        content_type: 6
+        codename: change_group
+-   model: auth.permission
+    pk: 23
+    fields:
+        name: Can delete group
+        content_type: 6
+        codename: delete_group
+-   model: auth.permission
+    pk: 24
+    fields:
+        name: Can view group
+        content_type: 6
+        codename: view_group
+-   model: auth.permission
+    pk: 25
+    fields:
+        name: Can add user
+        content_type: 7
+        codename: add_user
+-   model: auth.permission
+    pk: 26
+    fields:
+        name: Can change user
+        content_type: 7
+        codename: change_user
+-   model: auth.permission
+    pk: 27
+    fields:
+        name: Can delete user
+        content_type: 7
+        codename: delete_user
+-   model: auth.permission
+    pk: 28
+    fields:
+        name: Can view user
+        content_type: 7
+        codename: view_user
+-   model: auth.permission
+    pk: 29
+    fields:
+        name: Can add content type
+        content_type: 8
+        codename: add_contenttype
+-   model: auth.permission
+    pk: 30
+    fields:
+        name: Can change content type
+        content_type: 8
+        codename: change_contenttype
+-   model: auth.permission
+    pk: 31
+    fields:
+        name: Can delete content type
+        content_type: 8
+        codename: delete_contenttype
+-   model: auth.permission
+    pk: 32
+    fields:
+        name: Can view content type
+        content_type: 8
+        codename: view_contenttype
+-   model: auth.permission
+    pk: 33
+    fields:
+        name: Can add session
+        content_type: 9
+        codename: add_session
+-   model: auth.permission
+    pk: 34
+    fields:
+        name: Can change session
+        content_type: 9
+        codename: change_session
+-   model: auth.permission
+    pk: 35
+    fields:
+        name: Can delete session
+        content_type: 9
+        codename: delete_session
+-   model: auth.permission
+    pk: 36
+    fields:
+        name: Can view session
+        content_type: 9
+        codename: view_session
+-   model: auth.user
+    pk: 1
+    fields:
+        password: pbkdf2_sha256$320000$XCsyrcolVd3Lk43kxUwnsJ$nUPR1jZYtvuoEONWtdMDPBNFDCOHfa+444F5ONCtlek=
+        last_login: null
+        is_superuser: true
+        username: tony
+        first_name: ''
+        last_name: ''
+        email: toan@gmail.com
+        is_staff: true
+        is_active: true
+        date_joined: 2022-04-23 22:15:02.809851+00:00
+        groups: []
+        user_permissions: []
+-   model: contenttypes.contenttype
+    pk: 1
+    fields:
+        app_label: ledger_api
+        model: reason
+-   model: contenttypes.contenttype
+    pk: 2
+    fields:
+        app_label: ledger_api
+        model: transaction
+-   model: contenttypes.contenttype
+    pk: 3
+    fields:
+        app_label: ledger_auth
+        model: revokedtoken
+-   model: contenttypes.contenttype
+    pk: 4
+    fields:
+        app_label: admin
+        model: logentry
+-   model: contenttypes.contenttype
+    pk: 5
+    fields:
+        app_label: auth
+        model: permission
+-   model: contenttypes.contenttype
+    pk: 6
+    fields:
+        app_label: auth
+        model: group
+-   model: contenttypes.contenttype
+    pk: 7
+    fields:
+        app_label: auth
+        model: user
+-   model: contenttypes.contenttype
+    pk: 8
+    fields:
+        app_label: contenttypes
+        model: contenttype
+-   model: contenttypes.contenttype
+    pk: 9
+    fields:
+        app_label: sessions
+        model: session

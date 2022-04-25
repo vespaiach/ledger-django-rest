@@ -56,7 +56,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'querycount.middleware.QueryCountMiddleware',
     'ledger_auth.middlewares.TokenMiddleware',
-    'ledger_api.middlewares.ExceptionHandlerMiddleware'
+    'ledger_core.middlewares.ExceptionHandlerMiddleware',
 ]
 
 ROOT_URLCONF = 'ledger_django.urls'

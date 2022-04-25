@@ -1,14 +1,16 @@
 from typing import List
 from django.core.paginator import Paginator
+
 from ledger_api.models import Reason, Transaction
-from django.core.exceptions import ObjectDoesNotExist
 
 
-def get_transactions(page=1, record_per_page=50, **kwargs) -> Paginator:
-    """Using Paginator is hurting database performance
-       Todo: find another way to do pagination
+def get_transactions(user_id, page=1, record_per_page=50, **kwargs) -> Paginator:
+    """
+    Using Paginator is hurting database performance
+    Todo: find another way to do pagination
     """
     tx_manager = Transaction.objects
+    tx_manager = tx_manager.filter(user__pk=user_id)
 
     if "from_date" in kwargs:
         tx_manager = tx_manager.filter(
@@ -36,14 +38,14 @@ def get_transactions(page=1, record_per_page=50, **kwargs) -> Paginator:
     return paging.page(page).object_list, paging.num_pages, paging.count
 
 
-def get_transaction(id: int) -> Transaction:
-    return Transaction.objects.get(pk=id)
+def get_transaction(id: int, user_id=int) -> Transaction:
+    return Transaction.objects.get(pk=id, user__id=user_id)
 
 
 def get_reason_by_text(text: str) -> Reason:
     try:
         return Reason.objects.get(text__exact=text)
-    except ObjectDoesNotExist:
+    except:
         return None
 
 

@@ -1,8 +1,9 @@
-from django.contrib.auth.models import User
-from django.contrib.auth.models import User as OriginUser
+from django.contrib.auth import get_user_model
 from django.db import models
-from django.forms import ValidationError
 from django.utils import timezone
+
+
+UserModel = get_user_model()
 
 
 class BaseModel(models.Model):
@@ -15,18 +16,9 @@ class BaseModel(models.Model):
 
 
 class Reason(BaseModel):
-    text = models.CharField(unique=True, max_length=255, blank=False)
-
     # https://www.sqlite.org/faq.html#:~:text=(9)%20What%20is%20the%20maximum,all%20500%2Dmillion%20characters%20intact.
     # SQLite doesn't enforce the length of varchar
-    def clean(self):
-        if not self.text or len(self.text) == 0:
-            raise ValidationError(
-                "Please enter reason text.")
-
-        if len(self.text) > 255:
-            raise ValidationError(
-                "Reason text shouldn't be more than 255 characters.")
+    text = models.CharField(unique=True, max_length=255, blank=False)
 
     class Meta:
         ordering = ["text"]
@@ -41,11 +33,7 @@ class Transaction(BaseModel):
     note = models.CharField(max_length=511, blank=True)
 
     reasons = models.ManyToManyField(Reason, blank=False)
-
-    def clean(self):
-        if self.note and len(self.note) > 511:
-            raise ValidationError(
-                "Note shouldn't be more than 511 characters.")
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE, blank=False)
 
     class Meta:
         ordering = ["-date"]

@@ -2,8 +2,6 @@ from django.urls import reverse
 from django.test import Client, TestCase
 import json
 
-from ledger_auth.services import is_revoked
-
 
 class TokenTest(TestCase):
     fixtures = ['user.yaml']
@@ -22,9 +20,12 @@ class TokenTest(TestCase):
 
         self.assertEqual(response.status_code, 400)
 
-        error_response = json.loads(response.content.decode('utf-8'))
-        self.assertEqual(error_response['message'],
-                         "username or password was not correct")
+    def test_request_token_with_missing_fields(self):
+        c = Client()
+        response = c.post(
+            reverse('get_token'), {'password': '123'}, content_type='application/json')
+
+        self.assertEqual(response.status_code, 400)
 
     def test_revoke_token(self):
         c = Client()
