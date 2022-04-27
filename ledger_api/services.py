@@ -2,7 +2,6 @@ from typing import List
 
 from ledger_api.models import Reason, Transaction
 from ledger_api.selectors import get_reason_by_text
-from ledger_core.exception import throw_validation_error
 from ledger_core.validators import validate_require
 
 
@@ -66,3 +65,7 @@ def delete_transaction(id: int, user_id: int) -> None:
 
     tx.reasons.clear()
     tx.delete()
+
+
+def get_reasons():
+    return Reason.objects.sort_by('text')

@@ -40,7 +40,7 @@ class TokenMiddleware(object):
         self.get_response = get_response
 
     def _get_token(self, request):
-        authorization = request.META.get('authorization', '')
+        authorization = request.META.get('HTTP_AUTHORIZATION', '')
 
         if len(authorization) > 0:
             token = authorization if not authorization.startswith(

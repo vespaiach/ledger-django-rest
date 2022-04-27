@@ -11,6 +11,9 @@ class BaseModel(models.Model):
         db_index=True, default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def to_dict(self):
+        raise NotImplementedError("")
+
     class Meta:
         abstract = True
 
@@ -26,6 +29,9 @@ class Reason(BaseModel):
     def __str__(self):
         return f"id:{self.id}|text:{self.text}"
 
+    def to_dict(self):
+        return dict(id=self.id, text=self.text)
+
 
 class Transaction(BaseModel):
     amount = models.IntegerField(blank=False)
@@ -37,6 +43,15 @@ class Transaction(BaseModel):
 
     class Meta:
         ordering = ["-date"]
+
+    def get_reasons(self):
+        return self.reasons.all()
+
+    def to_dict(self):
+        return dict(
+            id=self.id, amount=self.amount, date=self.date, note=self.note, reasons=[
+                r.to_dict() for r in self.get_reasons()]
+        )
 
     def __str__(self):
         return f"id:{self.id}|amount:{self.amount}|date:{self.date}"

@@ -19,5 +19,6 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include("ledger_auth.urls")),
+    path('api/', include(("ledger_auth.urls", "ledger_auth"), "auth")),
+    path('api/', include(("ledger_api.urls", "ledger_api"), "api")),
 ]
