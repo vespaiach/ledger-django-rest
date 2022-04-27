@@ -4,3 +4,4 @@ Faker==13.3.4
 PyJWT==2.3.0
 PyYAML==6.0
 django-querycount==0.7.0
+pytz==2022.1

@@ -23,13 +23,6 @@ REST API backend server for Ledger App, it's written in Python with only Django 
 
 # Developement
 
--   Load dummy data
-
-```
-python manage.py migrate
-python manage.py gen_dummy_data
-```
-
 -   Update settings in `ledger_django.settings`
     | Key | Description |
     | -------------------------- | --------------------------- |
@@ -37,6 +30,19 @@ python manage.py gen_dummy_data
     | JWT_ALGORITHM | JWT algorithm |
     | JWT_ISSUER | JWT issuer |
     | JWT_DURATION | JWT lifetime in minutes |
+
+-   Create a virtual env and activate it
+
+```
+python -m venv ./ledger
+source ./ledger/bin/activate
+```
+
+-   Install packages
+
+```
+pip install -r requirement.txt
+```
 
 -   Run server
 
@@ -51,3 +57,22 @@ This project is using django Client tool to test APIs
 ```
 python manage.py test
 ```
+
+# Dummy data
+
+To generate dummy data uses this command
+
+```
+python manage.py migrate
+python manage.py gen_dummy_data
+```
+
+It will create a user with `username=tester/ password=123` and add 100 dummy transactions for that user. This command can be executed multiple times to generate more data.
+
+# Frameworks/ libraries
+
+-   Django (4.x)
+-   PyJWT
+-   PyYAML
+-   PyTZ
+-   Faker
