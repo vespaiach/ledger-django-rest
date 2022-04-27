@@ -19,10 +19,10 @@ def get_transactions(user_id, page=1, per_page=50, from_date=None, to_date=None,
     if to_date:
         tx_manager = tx_manager.filter(date__lte=to_date)
 
-    if from_amount:
+    if from_amount is not None:
         tx_manager = tx_manager.filter(amount__gte=from_amount)
 
-    if to_amount:
+    if to_amount is not None:
         tx_manager = tx_manager.filter(amount__lte=to_amount)
 
     if reasons:

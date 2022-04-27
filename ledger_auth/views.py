@@ -1,40 +1,29 @@
-from django import forms
-from django.http import JsonResponse
-from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate
+from django.utils.decorators import method_decorator
 
 from ledger_core.exception import throw_validation_error
 from ledger_auth.services import generate_token, revoke_token
+from ledger_core.views import APIBaseView
+from ledger_auth.validations import PostTokenForm
 
 
-@csrf_exempt
-@require_http_methods(['POST'])
-def token(request):
-    class TokenForm(forms.Form):
-        username = forms.CharField(max_length=64, required=True)
-        password = forms.CharField(max_length=64, required=True)
+@method_decorator(csrf_exempt, name='dispatch')
+class TokenView(APIBaseView):
+    def post(self, request):
+        token_form = PostTokenForm(request.POST)
 
-    token_form = TokenForm(request.POST)
-    if not token_form.is_valid():
-        throw_validation_error(
-            message='Username and password are required', params=token_form.errors)
+        user = authenticate(request, **token_form.sanitized_data)
 
-    user = authenticate(
-        request, username=token_form.cleaned_data['username'], password=token_form.cleaned_data['password'])
+        if user is None:
+            throw_validation_error(
+                message='username or password was not correct')
 
-    if user is None:
-        throw_validation_error(
-            message='username or password was not correct')
+        return dict(token=generate_token(user.id))
 
-    return JsonResponse({"token": generate_token(user.id)})
+    def delete(self, request):
+        if request.TOKEN is not None:
+            revoke_token(request.TOKEN['token'],
+                         request.TOKEN['payload']['exp'])
 
-
-@csrf_exempt
-@require_http_methods(['POST'])
-def revoke(request):
-    if request.TOKEN is not None:
-        revoke_token(request.TOKEN['token'], request.TOKEN['payload']['exp'])
-        return JsonResponse({"data": True})
-
-    return JsonResponse({"data": False})
+        return None

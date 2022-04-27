@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.forms import ValidationError
+from django.core.exceptions import ValidationError, PermissionDenied
 from django.http import JsonResponse
 import os
 
@@ -18,5 +18,8 @@ class ExceptionHandlerMiddleware(object):
 
         if isinstance(exception, ValidationError):
             return JsonResponse(data=dict(message=exception.message, fields=exception.params), status=400)
+
+        if isinstance(exception, PermissionDenied):
+            return JsonResponse(data=dict(message=str(exception)), status=403)
 
         return JsonResponse(data=dict(message="Something went wrong"), status=500)

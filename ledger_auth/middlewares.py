@@ -54,11 +54,14 @@ class TokenMiddleware(object):
 
         token = self._get_token(request)
 
-        if token and not is_revoked(token):
-            token_dict = decode_token(token)
+        try:
+            if token and not is_revoked(token):
+                token_dict = decode_token(token)
 
-            if token_dict:
-                request.TOKEN = {"payload": token_dict, "token": token}
+                if token_dict:
+                    request.TOKEN = {"payload": token_dict, "token": token}
+        except Exception as e:
+            request.TOKEN = None
 
         response = self.get_response(request)
 

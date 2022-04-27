@@ -1,4 +1,6 @@
+import json
 from functools import wraps
+from django.test import TestCase
 from django.core.exceptions import PermissionDenied
 
 
@@ -26,3 +28,20 @@ def require_token(func):
         return func(request, *args, **kwargs)
 
     return inner
+
+
+class APITestCase(TestCase):
+    def is_status_200(self, response):
+        self.assertEqual(response.status_code, 200)
+
+    def is_status_400(self, response):
+        self.assertEqual(response.status_code, 400)
+
+    def is_status_404(self, response):
+        self.assertEqual(response.status_code, 404)
+
+    def is_json_content(self, response):
+        self.assertEqual(response.headers['Content-Type'], 'application/json')
+
+    def to_dict(self, response):
+        return json.loads(response.content.decode('utf-8'))

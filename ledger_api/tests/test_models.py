@@ -142,7 +142,7 @@ class QueryTransactionTest(TestCase):
 
     def test_query_transaction_by_single_reason(self):
         transactions, total_page, total_record = get_transactions(user_id=1,
-                                                                  reasons=1)
+                                                                  reasons=['salary'])
 
         self.assertEqual(len(transactions), 1)
         self.assertEqual(total_page, 1)
