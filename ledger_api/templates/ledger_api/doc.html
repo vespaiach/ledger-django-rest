@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Ledger API documentation" />
+        <title>Ledger API</title>
+        <link rel="stylesheet" href="{% static 'ledger_api/swagger-ui.css' %}" />
+    </head>
+    <body>
+        <div id="swagger-ui"></div>
+        <script src="{% static 'ledger_api/swagger-ui-bundle.js' %}" crossorigin></script>
+        <script>
+            window.onload = () => {
+                window.ui = SwaggerUIBundle({
+                    url: '{% static "ledger_api/doc.yaml" %}',
+                    dom_id: '#swagger-ui',
+                });
+            };
+        </script>
+    </body>
+</html>

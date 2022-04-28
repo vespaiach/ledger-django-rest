@@ -13,8 +13,8 @@ class ExceptionHandlerMiddleware(object):
         return response
 
     def process_exception(self, request, exception):
-        if settings.DEBUG and not os.environ.get('TESTING'):
-            return None
+        # if settings.DEBUG and not os.environ.get('TESTING'):
+        #     return None
 
         if isinstance(exception, ValidationError):
             return JsonResponse(data=dict(message=exception.message, fields=exception.params), status=400)

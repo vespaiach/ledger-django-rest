@@ -58,6 +58,10 @@ This project is using django Client tool to test APIs
 python manage.py test
 ```
 
+# Swagger UI
+
+After running server, interactive API documentation and exploration web user interfaces can be accessed at: http://localhost:8000/api/doc
+
 # Dummy data
 
 To generate dummy data uses this command
@@ -76,3 +80,4 @@ It will create a user with `username=tester/ password=123` and add 100 dummy tra
 -   PyYAML
 -   PyTZ
 -   Faker
+-   Django-cors-headers

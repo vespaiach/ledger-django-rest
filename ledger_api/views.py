@@ -1,5 +1,7 @@
+from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from django.template.loader import render_to_string
 
 from ledger_api.selectors import get_reasons, get_transaction, get_transactions
 from ledger_api.services import create_transaction, delete_transaction, update_transaction
@@ -54,3 +56,7 @@ class TransactionsView(APIBaseView):
         form = PutTransactionsForm(request.PUT)
 
         return update_transaction(user_id=user_id, **form.sanitized_data)
+
+
+def api_doc(request):
+    return HttpResponse(render_to_string("ledger_api/doc.html"))
