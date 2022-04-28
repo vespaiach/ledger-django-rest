@@ -17,7 +17,9 @@ class JSONContentTypeMiddleware(object):
         content_type = request.META.get('CONTENT_TYPE', '').lower()
         method = request.method
 
-        if 'application/json' in content_type and request.body and method != 'GET':
+        # GET, DELETE and HEAD have no request body defined semantics as per RFC 7231.
+        except_methods = ['GET', 'DELETE', 'HEAD']
+        if 'application/json' in content_type and request.body and not method in except_methods:
             try:
                 q_data = QueryDict('', mutable=True)
                 q_data.update(json.loads(request.body))
@@ -44,7 +46,7 @@ class TokenMiddleware(object):
 
         if len(authorization) > 0:
             token = authorization if not authorization.startswith(
-                'Bearer ') else authorization[6:]
+                'Bearer ') else authorization[7:]
 
             return token
         return None
