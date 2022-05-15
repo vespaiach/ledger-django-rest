@@ -12,8 +12,8 @@ fake = Faker()
 UserModel = get_user_model()
 
 
-EXPENSE_REASONS = ['food', 'fuel', 'medicine', 'gas', 'water', 'electricity']
-INCOME_REASONS = ['salary', 'tips', 'bonus']
+EXPENSE_REASONS = ['food', 'fuel', 'medicine', 'gas', 'water', 'electricity', 'trash', 'pet', 'clothes', 'tax', 'insurance']
+INCOME_REASONS = ['salary', 'tips', 'bonus', 'gift']
 
 
 class Command(BaseCommand):
