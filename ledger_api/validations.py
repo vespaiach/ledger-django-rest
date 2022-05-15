@@ -19,16 +19,16 @@ class GetTransactionsForm(BaseForm):
     def sanitized_data(self):
         dt = dict(super().sanitized_data)
 
-        if dt['reasons'] is not None and len(dt['reasons']) > 0:
-            dt['reasons'] = dt['reasons'].split(',')
+        if dt["reasons"] is not None and len(dt["reasons"]) > 0:
+            dt["reasons"] = dt["reasons"].split(",")
         else:
-            dt['reasons'] = None
+            dt["reasons"] = None
 
-        if not dt['page']:
-            dt['page'] = 1
+        if not dt["page"]:
+            dt["page"] = 1
 
-        if not dt['per_page']:
-            dt['per_page'] = 50
+        if not dt["per_page"]:
+            dt["per_page"] = 50
 
         return dt
 

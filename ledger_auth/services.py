@@ -11,21 +11,20 @@ def is_revoked(token):
     try:
         RevokedToken.objects.get(pk=token)
         return True
-    except:
+    except Exception:
         return False
 
 
 def generate_token(user_id):
-    duration = getattr(settings, 'JWT_DURATION', 60)
-    issuer = getattr(settings, 'JWT_ISSUER', None)
+    duration = getattr(settings, "JWT_DURATION", 60)
+    issuer = getattr(settings, "JWT_ISSUER", None)
 
     iat = int(datetime.utcnow().timestamp())
-    exp = int(
-        (datetime.utcnow() + timedelta(minutes=duration)).timestamp())
+    exp = int((datetime.utcnow() + timedelta(minutes=duration)).timestamp())
 
     payload = {"user_id": user_id, "exp": exp, "iat": iat}
     if issuer is not None:
-        payload['iss'] = issuer
+        payload["iss"] = issuer
 
     token = encode(payload, settings.SECRET_KEY, settings.JWT_ALGORITHM)
 
@@ -33,12 +32,10 @@ def generate_token(user_id):
 
 
 def revoke_token(token, exp):
-    RevokedToken.objects.create(
-        token=token, exp=datetime.fromtimestamp(exp / 1e3))
+    RevokedToken.objects.create(token=token, exp=datetime.fromtimestamp(exp / 1e3))
 
 
 def decode_token(token):
-    issuer = getattr(settings, 'JWT_ISSUER', None)
-    token_dict = decode(
-        token, settings.SECRET_KEY, issuer=issuer, algorithms=[settings.JWT_ALGORITHM])
+    issuer = getattr(settings, "JWT_ISSUER", None)
+    token_dict = decode(token, settings.SECRET_KEY, issuer=issuer, algorithms=[settings.JWT_ALGORITHM])
     return token_dict

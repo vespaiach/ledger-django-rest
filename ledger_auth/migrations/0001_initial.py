@@ -8,17 +8,16 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='RevokedToken',
+            name="RevokedToken",
             fields=[
-                ('token', models.CharField(max_length=2024, primary_key=True, serialize=False)),
-                ('exp', models.DateTimeField()),
-                ('created_at', models.DateTimeField(db_index=True, default=django.utils.timezone.now)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
+                ("token", models.CharField(max_length=2024, primary_key=True, serialize=False)),
+                ("exp", models.DateTimeField()),
+                ("created_at", models.DateTimeField(db_index=True, default=django.utils.timezone.now)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
             ],
         ),
     ]

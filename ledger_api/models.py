@@ -7,8 +7,7 @@ UserModel = get_user_model()
 
 
 class BaseModel(models.Model):
-    created_at = models.DateTimeField(
-        db_index=True, default=timezone.now)
+    created_at = models.DateTimeField(db_index=True, default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
 
     def to_dict(self):
@@ -49,8 +48,11 @@ class Transaction(BaseModel):
 
     def to_dict(self):
         return dict(
-            id=self.id, amount=self.amount, date=self.date, note=self.note, reasons=[
-                r.to_dict() for r in self.get_reasons()]
+            id=self.id,
+            amount=self.amount,
+            date=self.date,
+            note=self.note,
+            reasons=[r.to_dict() for r in self.get_reasons()],
         )
 
     def __str__(self):

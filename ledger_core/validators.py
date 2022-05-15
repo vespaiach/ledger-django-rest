@@ -14,7 +14,7 @@ def validate_require(field_name, val):
 class BaseForm(forms.Form):
     @property
     def sanitized_data(self):
-        if not hasattr(self, 'cleaned_data') or self.cleaned_data is None:
+        if not hasattr(self, "cleaned_data") or self.cleaned_data is None:
             self.full_clean()
 
         if self.is_valid():

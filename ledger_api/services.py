@@ -41,21 +41,20 @@ def create_transaction(user_id: int, amount: int, date: str, note: str, reasons:
 def update_transaction(id: int, user_id: int, **kwargs) -> Transaction:
     tx = Transaction.objects.get(pk=id, user__id=user_id)
 
-    if 'amount' in kwargs:
-        tx.amount = kwargs['amount']
+    if "amount" in kwargs:
+        tx.amount = kwargs["amount"]
 
-    if 'date' in kwargs:
-        tx.date = kwargs['date']
+    if "date" in kwargs:
+        tx.date = kwargs["date"]
 
-    if 'note' in kwargs:
-        tx.note = kwargs['note']
+    if "note" in kwargs:
+        tx.note = kwargs["note"]
 
     tx.full_clean()
     tx.save()
 
-    if 'reasons' in kwargs:
-        reasons = kwargs['reasons'] if type(kwargs['reasons']) is list else [
-            kwargs['reasons']]
+    if "reasons" in kwargs:
+        reasons = kwargs["reasons"] if type(kwargs["reasons"]) is list else [kwargs["reasons"]]
         tx.reasons.clear()
         return update_transaction_reasons(tx, reasons)
 
@@ -68,4 +67,4 @@ def delete_transaction(id: int, user_id: int) -> None:
 
 
 def get_reasons():
-    return Reason.objects.sort_by('text')
+    return Reason.objects.sort_by("text")

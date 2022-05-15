@@ -4,8 +4,9 @@ from django.core.paginator import Paginator
 from ledger_api.models import Reason, Transaction
 
 
-def get_transactions(user_id, page=1, per_page=50, from_date=None, to_date=None,
-                     from_amount=None, to_amount=None, reasons=None):
+def get_transactions(
+    user_id, page=1, per_page=50, from_date=None, to_date=None, from_amount=None, to_amount=None, reasons=None
+):
     """
     Using Paginator is hurting database performance
     Todo: find another way to do pagination
@@ -26,10 +27,9 @@ def get_transactions(user_id, page=1, per_page=50, from_date=None, to_date=None,
         tx_manager = tx_manager.filter(amount__lte=to_amount)
 
     if reasons:
-        tx_manager = tx_manager.filter(
-            reasons__in=Reason.objects.filter(text__in=reasons))
+        tx_manager = tx_manager.filter(reasons__in=Reason.objects.filter(text__in=reasons))
 
-    paging = Paginator(tx_manager.all().prefetch_related('reasons'), per_page)
+    paging = Paginator(tx_manager.all().prefetch_related("reasons"), per_page)
 
     return paging.page(page).object_list, paging.num_pages, paging.count
 
@@ -41,9 +41,9 @@ def get_transaction(id: int, user_id=int) -> Transaction:
 def get_reason_by_text(text: str) -> Reason:
     try:
         return Reason.objects.get(text__exact=text)
-    except:
+    except Exception:
         return None
 
 
 def get_reasons() -> List[Reason]:
-    return Reason.objects.order_by('text').all()
+    return Reason.objects.order_by("text").all()

@@ -14,17 +14,17 @@ class JSONContentTypeMiddleware(object):
         self.get_response = get_response
 
     def __call__(self, request):
-        content_type = request.META.get('CONTENT_TYPE', '').lower()
+        content_type = request.META.get("CONTENT_TYPE", "").lower()
         method = request.method
 
         # GET, DELETE and HEAD have no request body defined semantics as per RFC 7231.
-        except_methods = ['GET', 'DELETE', 'HEAD']
-        if 'application/json' in content_type and request.body and not method in except_methods:
+        except_methods = ["GET", "DELETE", "HEAD"]
+        if "application/json" in content_type and request.body and method not in except_methods:
             try:
-                q_data = QueryDict('', mutable=True)
+                q_data = QueryDict("", mutable=True)
                 q_data.update(json.loads(request.body))
-            except:
-                throw_validation_error(message='Payload had wrong json format')
+            except Exception:
+                throw_validation_error(message="Payload had wrong json format")
             else:
                 setattr(request, method, q_data)
 
@@ -42,11 +42,10 @@ class TokenMiddleware(object):
         self.get_response = get_response
 
     def _get_token(self, request):
-        authorization = request.META.get('HTTP_AUTHORIZATION', '')
+        authorization = request.META.get("HTTP_AUTHORIZATION", "")
 
         if len(authorization) > 0:
-            token = authorization if not authorization.startswith(
-                'Bearer ') else authorization[7:]
+            token = authorization if not authorization.startswith("Bearer ") else authorization[7:]
 
             return token
         return None
@@ -62,7 +61,7 @@ class TokenMiddleware(object):
 
                 if token_dict:
                     request.TOKEN = {"payload": token_dict, "token": token}
-        except Exception as e:
+        except Exception:
             request.TOKEN = None
 
         response = self.get_response(request)

@@ -23,7 +23,7 @@ def require_token(func):
     @wraps(func)
     def inner(request, *args, **kwargs):
         if request.TOKEN is None:
-            raise PermissionDenied('Token required')
+            raise PermissionDenied("Token required")
 
         return func(request, *args, **kwargs)
 
@@ -41,7 +41,7 @@ class APITestCase(TestCase):
         self.assertEqual(response.status_code, 404)
 
     def is_json_content(self, response):
-        self.assertEqual(response.headers['Content-Type'], 'application/json')
+        self.assertEqual(response.headers["Content-Type"], "application/json")
 
     def to_dict(self, response):
-        return json.loads(response.content.decode('utf-8'))
+        return json.loads(response.content.decode("utf-8"))

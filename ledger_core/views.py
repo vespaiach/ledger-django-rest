@@ -13,11 +13,11 @@ def _to_dict(data):
             result[k] = _to_dict(v)
         return result
     else:
-        to_dict = getattr(data, 'to_dict', None)
+        to_dict = getattr(data, "to_dict", None)
         if callable(to_dict):
             return to_dict()
         else:
-            return getattr(data, '__dict__', data)
+            return getattr(data, "__dict__", data)
 
 
 class APIBaseView(View):
@@ -27,4 +27,7 @@ class APIBaseView(View):
         if response is None:
             return HttpResponse(status=204)
 
-        return HttpResponse(content_type="application/json", content=json.dumps(_to_dict(response), sort_keys=True, default=str))
+        return HttpResponse(
+            content_type="application/json",
+            content=json.dumps(_to_dict(response), sort_keys=True, default=str),
+        )

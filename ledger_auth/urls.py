@@ -4,5 +4,5 @@ from . import views
 
 
 urlpatterns = [
-    path('token', views.TokenView.as_view(), name='token_view'),
+    path("token", views.TokenView.as_view(), name="token_view"),
 ]

@@ -6,7 +6,7 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ledger_django.settings')
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ledger_django.settings")
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
@@ -17,11 +17,11 @@ def main():
         ) from exc
 
     # When running in test mode, some flags need to be set
-    if sys.argv[1:2] == ['test']:
-        os.environ.setdefault('TESTING', 'True')
+    if sys.argv[1:2] == ["test"]:
+        os.environ.setdefault("TESTING", "True")
 
     execute_from_command_line(sys.argv)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

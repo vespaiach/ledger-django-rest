@@ -1,7 +1,5 @@
-from django.conf import settings
 from django.core.exceptions import ValidationError, PermissionDenied
 from django.http import JsonResponse
-import os
 
 
 class ExceptionHandlerMiddleware(object):

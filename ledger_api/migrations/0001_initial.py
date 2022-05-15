@@ -16,31 +16,46 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Reason',
+            name="Reason",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(db_index=True, default=django.utils.timezone.now)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('text', models.CharField(max_length=255, unique=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("created_at", models.DateTimeField(db_index=True, default=django.utils.timezone.now)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                ("text", models.CharField(max_length=255, unique=True)),
             ],
             options={
-                'ordering': ['text'],
+                "ordering": ["text"],
             },
         ),
         migrations.CreateModel(
-            name='Transaction',
+            name="Transaction",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(db_index=True, default=django.utils.timezone.now)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('amount', models.IntegerField()),
-                ('date', models.DateTimeField()),
-                ('note', models.CharField(blank=True, max_length=511)),
-                ('reasons', models.ManyToManyField(to='ledger_api.reason')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("created_at", models.DateTimeField(db_index=True, default=django.utils.timezone.now)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                ("amount", models.IntegerField()),
+                ("date", models.DateTimeField()),
+                ("note", models.CharField(blank=True, max_length=511)),
+                ("reasons", models.ManyToManyField(to="ledger_api.reason")),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL
+                    ),
+                ),
             ],
             options={
-                'ordering': ['-date'],
+                "ordering": ["-date"],
             },
         ),
     ]
