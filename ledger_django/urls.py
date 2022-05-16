@@ -16,8 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from ledger_api.views import api_doc
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include(("ledger_auth.urls", "ledger_auth"), "auth")),
     path("api/", include(("ledger_api.urls", "ledger_api"), "api")),
+    path("", api_doc, name="home"),
 ]

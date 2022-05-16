@@ -31,6 +31,12 @@ def get_transactions(
 
     paging = Paginator(tx_manager.all().prefetch_related("reasons"), per_page)
 
+    if paging.count == 0:
+        return [], 0, 0
+
+    if page > paging.num_pages:
+        return [], paging.num_pages, paging.count
+
     return paging.page(page).object_list, paging.num_pages, paging.count
 
 

@@ -54,7 +54,7 @@ class Command(BaseCommand):
                 ),
                 amount=amount,
                 note=fake.text(),
-                reasons=reasons,
+                reasons=[reasons],
             )
 
         print("Done!")

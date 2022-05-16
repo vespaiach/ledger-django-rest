@@ -41,19 +41,19 @@ def create_transaction(user_id: int, amount: int, date: str, note: str, reasons:
 def update_transaction(id: int, user_id: int, **kwargs) -> Transaction:
     tx = Transaction.objects.get(pk=id, user__id=user_id)
 
-    if "amount" in kwargs:
+    if "amount" in kwargs and kwargs["amount"] is not None:
         tx.amount = kwargs["amount"]
 
-    if "date" in kwargs:
+    if "date" in kwargs and kwargs["date"] is not None:
         tx.date = kwargs["date"]
 
-    if "note" in kwargs:
+    if "note" in kwargs and kwargs["note"] is not None:
         tx.note = kwargs["note"]
 
     tx.full_clean()
     tx.save()
 
-    if "reasons" in kwargs:
+    if "reasons" in kwargs and kwargs["reasons"] is not None:
         reasons = kwargs["reasons"] if type(kwargs["reasons"]) is list else [kwargs["reasons"]]
         tx.reasons.clear()
         return update_transaction_reasons(tx, reasons)

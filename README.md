@@ -1,6 +1,6 @@
-# ledger_django
+# ledger_django_restful
 
-REST API backend server for Ledger App, it's written in Python with only Django framework.
+REST API backend server for Ledger Application, it's written in Python with only Django framework.
 
 # Endpoints
 
@@ -12,8 +12,8 @@ REST API backend server for Ledger App, it's written in Python with only Django 
 | /api/transactions          | GET         | Query transactions          |
 | /api/transactions/<int:id> | GET         | Get a transaction by its id |
 | /api/transactions          | POST        | Create a transaction        |
-| /api/transactions          | PUT         | Update a transaction        |
-| /api/transactions          | DELETE      | Delete a transaction        |
+| /api/transactions/<int:id> | PUT         | Update a transaction        |
+| /api/transactions/<int:id> | DELETE      | Delete a transaction        |
 
 # DB Schema
 

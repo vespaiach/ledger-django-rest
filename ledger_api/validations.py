@@ -49,7 +49,7 @@ class PutTransactionsForm(BaseForm):
     amount = forms.IntegerField(required=False)
     date = forms.DateTimeField(required=False)
     reasons = forms.JSONField(required=False)
-    note = forms.CharField(required=False, max_length=511)
+    note = forms.CharField(empty_value=None, required=False, max_length=511)
 
     @property
     def sanitized_data(self):

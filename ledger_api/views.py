@@ -37,6 +37,14 @@ class TransactionView(APIBaseView):
 
         return delete_transaction(user_id=user_id, **form.sanitized_data)
 
+    def put(self, request, id):
+        user_id = request.TOKEN["payload"]["user_id"]
+        payload = request.PUT.copy()
+        payload.__setitem__("id", id)
+        form = PutTransactionsForm(payload)
+
+        return update_transaction(user_id=user_id, **form.sanitized_data)
+
 
 @method_decorator(require_token, name="dispatch")
 @method_decorator(csrf_exempt, name="dispatch")
@@ -54,12 +62,6 @@ class TransactionsView(APIBaseView):
         form = PostTransactionsForm(request.POST)
 
         return create_transaction(user_id=user_id, **form.sanitized_data)
-
-    def put(self, request):
-        user_id = request.TOKEN["payload"]["user_id"]
-        form = PutTransactionsForm(request.PUT)
-
-        return update_transaction(user_id=user_id, **form.sanitized_data)
 
 
 def api_doc(request):

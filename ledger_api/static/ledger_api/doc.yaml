@@ -111,6 +111,55 @@ paths:
                                 $ref: '#/components/schemas/validation_error'
             security:
                 - bearer_auth: []
+        put:
+            tags:
+                - transactions
+            summary: Update a transaction
+            parameters:
+                - name: id
+                  in: path
+                  description: Transaction Id
+                  required: true
+                  schema:
+                      type: integer
+            requestBody:
+                description: 'Transaction payload'
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: 'object'
+                            properties:
+                                amount:
+                                    type: integer
+                                    example: 1000
+                                date:
+                                    type: string
+                                    description: ISO 8601
+                                    example: '2022-04-27 12:12:00.000+00:00'
+                                note:
+                                    type: string
+                                    example: 'from giftcard'
+                                reasons:
+                                    type: array
+                                    items:
+                                        type: string
+                                    example: ['tips']
+            responses:
+                '200':
+                    description: 'successfully updated token'
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/transaction'
+                '400':
+                    description: 'Amount field is required'
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/validation_error'
+            security:
+                - bearer_auth: []
 
     /transactions:
         get:
@@ -227,32 +276,6 @@ paths:
                                         type: string
                                     example: ['tips']
 
-            responses:
-                '200':
-                    description: 'successfully created token'
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/transaction'
-                '400':
-                    description: 'Amount field is required'
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/validation_error'
-            security:
-                - bearer_auth: []
-        put:
-            tags:
-                - transactions
-            summary: Update a transaction
-            requestBody:
-                description: 'Transaction payload'
-                required: true
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/transaction'
             responses:
                 '200':
                     description: 'successfully created token'

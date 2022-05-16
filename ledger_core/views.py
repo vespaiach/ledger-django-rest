@@ -6,7 +6,7 @@ from django.db.models import QuerySet
 
 def _to_dict(data):
     if isinstance(data, list) or isinstance(data, QuerySet):
-        return json.dumps([_to_dict(item) for item in data], sort_keys=True, default=str)
+        return [_to_dict(item) for item in data]
     if isinstance(data, dict):
         result = {}
         for k, v in data.items():
