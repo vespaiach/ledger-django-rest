@@ -12,12 +12,22 @@
         <div id="swagger-ui"></div>
         <script src="{% static 'ledger_api/swagger-ui-bundle.js' %}" crossorigin></script>
         <script>
+            {% if prod_mode %}
+            window.onload = () => {
+                window.ui = SwaggerUIBundle({
+                    url: '{% static "ledger_api/doc_prod.yaml" %}',
+                    dom_id: '#swagger-ui',
+                });
+            };
+            {% else %}
             window.onload = () => {
                 window.ui = SwaggerUIBundle({
                     url: '{% static "ledger_api/doc.yaml" %}',
                     dom_id: '#swagger-ui',
                 });
             };
+            {% endif %}
+
         </script>
     </body>
 </html>

@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.template.loader import render_to_string
+from django.conf import settings
 
 from ledger_api.selectors import get_reasons, get_transaction, get_transactions
 from ledger_api.services import create_transaction, delete_transaction, update_transaction
@@ -65,4 +66,4 @@ class TransactionsView(APIBaseView):
 
 
 def api_doc(request):
-    return HttpResponse(render_to_string("ledger_api/doc.html"))
+    return HttpResponse(render_to_string("ledger_api/doc.html", {"prod_mode": True}))

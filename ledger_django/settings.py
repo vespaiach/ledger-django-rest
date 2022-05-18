@@ -84,8 +84,10 @@ MIDDLEWARE = [
     "querycount.middleware.QueryCountMiddleware",
     "ledger_auth.middlewares.TokenMiddleware",
     "ledger_core.middlewares.ExceptionHandlerMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
+
+if not DEBUG:
+    MIDDLEWARE += ["whitenoise.middleware.WhiteNoiseMiddleware"]
 
 ROOT_URLCONF = "ledger_django.urls"
 
@@ -164,7 +166,8 @@ STATICFILES_DIRS = [
     BASE_DIR / "ledger_api/static/",
 ]
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+if not DEBUG:
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
