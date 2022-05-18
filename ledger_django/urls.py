@@ -15,8 +15,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from django.conf.urls.static import static
-from django.conf import settings
 
 from ledger_api.views import api_doc
 
@@ -25,4 +23,4 @@ urlpatterns = [
     path("api/", include(("ledger_auth.urls", "ledger_auth"), "auth")),
     path("api/", include(("ledger_api.urls", "ledger_api"), "api")),
     path("", api_doc, name="home"),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
