@@ -9,8 +9,16 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+import os
+import dj_database_url
 
 from pathlib import Path
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+if 'DEBUG' in os.environ:
+    DEBUG = os.environ['DEBUG'] == 'True'
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,26 +27,34 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-^j9mqh)sze3tl8!@%^8**%d0it7jzb+=%+na!r@*9-p1%le"
+SECRET_KEY = os.environ['SECRET_KEY'] if 'SECRET_KEY' in os.environ else 'django-insecure-^j9mqh)sze3tl8!@%^8**%d0it7jzb+=%+na!r@*9-p1%le'
+
+if 'SECRET_KEY' not in os.environ and not DEBUG:
+    raise Exception('Missing SECRET_KEY')
 
 JWT_ALGORITHM = "HS256"
 JWT_ISSUER = "ledger::"
 JWT_DURATION = 1440  # minutes
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8000",
-    "http://127.0.0.1:8000",
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:8000",
+#     "http://127.0.0.1:8000",
+# ]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "POST",
+    "PUT",
 ]
 
-
 # Application definition
-
 INSTALLED_APPS = [
     "ledger_api",
     "ledger_auth",
@@ -97,6 +113,10 @@ DATABASES = {
     }
 }
 
+if 'DATABASE_URL' in os.environ:
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+elif not DEBUG:
+    raise Exception('Missing DATABASE_URL key')
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
